@@ -1,0 +1,7 @@
+.venv
+prismo/auth.sqlite
+prismo/map.sqlite
+prismo/players.sqlite
+prismo/*.txt
+prismo/world.mt
+prismo/worldmods/greeting

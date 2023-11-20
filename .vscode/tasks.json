@@ -1,0 +1,17 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "run_container_attach",
+            "type": "shell",
+            "command": "docker run --rm -it -v `pwd`/prismo:/var/lib/multicraft/worlds/prismo -p 30000:30000/udp -p 45001:45001 mtwebbridge:latest"
+        },
+        {
+            "label": "launch multicraft",
+            "type": "shell",
+            "command": "/Applications/MultiCraft.app/Contents/MacOS/MultiCraft --address 127.0.0.1 --port 30000 --name smk --password 1234 --go --quiet"
+        }
+    ]
+}
