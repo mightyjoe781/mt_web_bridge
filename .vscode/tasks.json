@@ -6,12 +6,18 @@
         {
             "label": "run_container_attach",
             "type": "shell",
-            "command": "docker run --rm -it -v `pwd`/prismo:/var/lib/multicraft/worlds/prismo -p 30000:30000/udp -p 45001:45001 mtwebbridge:latest"
+            "command": "docker run --network host --rm -it -v `pwd`/prismo:/var/lib/multicraft/worlds/prismo -p 30000:30000/udp -p 45001:45001 mtwebbridge:latest"
         },
         {
             "label": "launch multicraft",
             "type": "shell",
             "command": "/Applications/MultiCraft.app/Contents/MacOS/MultiCraft --address 127.0.0.1 --port 30000 --name smk --password 1234 --go --quiet"
+        },
+        {
+            "label": "launch flask app",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["-m", "flask", "--app", "prismo.worldmods.web_bridge.server", "run"]
         }
     ]
 }

@@ -1,21 +1,25 @@
-
 local http = minetest.request_http_api()
-local settings = minetest.settings
-
-local port = settings:get('web_bridge.port') or 45001
-local timeout = 10
-
-local http_api = {}
-
--- validations
-if http then
-    http_api = dofile(minetest.get_modpath(minetest.get_current_modname()).."/http_lib.lua")(http_api)
-    print("[WebBridge] Bridge started...")
-else
-    print("[WebBridge] Failed to get the HTTP API!")
+if not http then
+    print("[web_bridge] mod not allowed to use the http api, aborting")
     return
 end
+print("[web_bridge] initializing...")
 
+web_bridge = {
+    -- network = host mode doesn't work on m1 macs
+    url = minetest.settings:get("web_bridge.url") or "http://host.docker.internal:5000",
+    key = minetest.settings:get("web_bridge.key") or "smk-secret-key"
+}
+
+local MP = minetest.get_modpath("web_bridge")
+local timeout = 10
 
 -- mod polls web-server for tasks every 3s
 -- task : cmd, msg, announce
+loadfile(MP.."/bridge_rx.lua")(http)
+loadfile(MP.."/bridge_tx.lua")(http)
+
+dofile(MP.."/common.lua")
+dofile(MP.."/handlers/execute_command.lua")
+dofile(MP.."/handlers/heartbeat.lua")
+dofile(MP.."/handlers/exception.lua")

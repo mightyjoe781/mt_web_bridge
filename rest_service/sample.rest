@@ -1,12 +1,20 @@
 
-@baseURL=http://localhost
-@basePORT=5000
+@baseURL=http://localhost:5000
 
-# GET {{baseURL}}:{{basePORT}}/
+# GET {{baseURL}}
 # Content-Type: "text/plain"
 
-# GET {{baseURL}}:{{basePORT}}/put
+# GET {{baseURL}}/api/bridge
 # Content-Type: "text/plain"
 
-GET {{baseURL}}:{{basePORT}}/consume
-Content-Type: "text/plain"
+POST {{baseURL}}/api/cmd HTTP/1.1
+content-type: application/json
+
+[{
+    "type": "execute_command",
+    "data": {
+        "command": "status",
+        "playername": "smk"
+    },
+    "id": "1000"
+}]
