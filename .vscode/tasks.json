@@ -17,7 +17,7 @@
             "label": "launch flask app",
             "type": "shell",
             "command": "${command:python.interpreterPath}",
-            "args": ["-m", "flask", "--app", "prismo.worldmods.web_bridge.server", "run"]
+            "args": ["-m", "flask", "--app", "rest_service.server", "run"]
         }
     ]
 }

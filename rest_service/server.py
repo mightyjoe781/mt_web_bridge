@@ -10,6 +10,11 @@ response_queue = queue.Queue()
 def hello_world():
     return "Status: Up"
 
+@app.route('/login')
+def login():
+    
+    return "login page"
+
 @app.route('/api/cmd', methods=["POST"])
 def producer():
     data = request.get_json(force=True)
