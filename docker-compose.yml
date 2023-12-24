@@ -1,0 +1,39 @@
+version: '3.6'
+
+services:
+  multicraft:
+    build: ./game_service/docker/
+    container_name: prismo
+    image: smk781/mtmod_dev_setup
+    entrypoint: "/usr/local/bin/multicraftserver --world /var/lib/multicraft/worlds/prismo --config /multicraft.conf"
+    user: root
+    volumes:
+      - "./game_service/mods:/var/lib/multicraft/worlds/prismo/worldmods"
+      - "./game_service/test/world.mt:/var/lib/multicraft/worlds/prismo/world.mt"
+      - "./game_service/test/multicraft.conf:/multicraft.conf"
+      - "prismo:/var/lib/multicraft/worlds/prismo"
+    ports:
+      - "30000:30000/udp"
+    links:
+      - backend
+    networks:
+      - shared_network
+  
+  backend:
+    build: ./rest_service/
+    restart: always
+    container_name: flask_backend
+    expose:
+      - "8050"
+    ports:
+      - "3000:8050"
+    networks:
+      - shared_network
+
+
+networks:
+  shared_network:
+    driver: bridge
+
+volumes:
+  prismo: {}

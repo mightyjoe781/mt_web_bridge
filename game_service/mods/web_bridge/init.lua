@@ -7,7 +7,7 @@ print("[web_bridge] initializing...")
 
 web_bridge = {
     -- network = host mode doesn't work on m1 macs
-    url = minetest.settings:get("web_bridge.url") or "http://host.docker.internal:5000",
+    url = minetest.settings:get("web_bridge.url") or "http://localhost:5000",
     key = minetest.settings:get("web_bridge.key") or "smk-secret-key"
 }
 
@@ -22,4 +22,4 @@ loadfile(MP.."/bridge_tx.lua")(http)
 dofile(MP.."/common.lua")
 dofile(MP.."/handlers/execute_command.lua")
 dofile(MP.."/handlers/heartbeat.lua")
-dofile(MP.."/handlers/exception.lua")
+-- dofile(MP.."/handlers/exception.lua")

@@ -5,3 +5,4 @@ prismo/players.sqlite
 prismo/*.txt
 prismo/world.mt
 prismo/worldmods/greeting
+.DS_Store
