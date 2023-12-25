@@ -1,4 +1,4 @@
-import { Container } from 'semantic-ui-react';
+import { Container, Card, Header } from 'semantic-ui-react';
 import { useState, useEffect } from 'react';
 
 async function fetchServerInfo() {
@@ -101,13 +101,20 @@ function PlayerCount (props) {
     );
 }
 
+
 function Dashboard() {
+    const servers = ["Prismo", "Adventure Time", "SurvivalGo", "Avalon"];
+    const cards = servers.map((item) => (
+      <Card key={item}><ServerInfo value={item} /></Card>
+    )).reduce((pre, cur) => pre.concat(cur), []);
+
     return (
         <>
-        <Container>
-            <ServerInfo value="Prismo" />
-            <ServerInfo value="Adventure Time" />
-            <ServerInfo value="SurvivalGo" />
+        <Container fluid textAlign='center'>
+            <Header as='h2'> Server Stats</Header>
+            <Card.Group centered>
+                {cards}
+            </Card.Group>
         </Container>
         </>
     );
