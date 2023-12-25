@@ -20,9 +20,14 @@ services:
       - shared_network
   
   backend:
-    build: ./rest_service/
-    restart: always
+    build:
+      context: ./rest_service
+      dockerfile: Dockerfile
     container_name: flask_backend
+    environment:
+      - FLASK_DEBUG=1
+    volumes:
+      - "./rest_service/:/mt_backend"
     expose:
       - "8050"
     ports:
@@ -32,7 +37,10 @@ services:
 
   frontend:
     build: ./web_service/
-    container_name: mt_console
+    container_name: react_frontend
+    restart: always
+    volumes:
+      - "./web_service/src:/mt_frontend/src"
     ports:
       - "3000:3000"
     links:
@@ -46,3 +54,5 @@ networks:
 
 volumes:
   prismo: {}
+  mt_backend: {}
+  mt_frontend: {}
