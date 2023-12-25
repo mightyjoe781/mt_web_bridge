@@ -1,0 +1,39 @@
+{
+  "name": "mt_frontend",
+  "version": "1.0.0",
+  "description": "frontend for minetest",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts test",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eject": "react-scripts eject"
+  },
+  "author": "smk",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "fomantic-ui": "^2.9.3",
+    "fomantic-ui-css": "^2.9.3",
+    "gulp": "^4.0.2",
+    "http": "^0.0.1-security",
+    "path": "^0.12.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1",
+    "react-scripts": "^5.0.1",
+    "semantic-ui-react": "^2.1.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -26,10 +26,19 @@ services:
     expose:
       - "8050"
     ports:
-      - "3000:8050"
+      - "3001:8050"
     networks:
       - shared_network
 
+  frontend:
+    build: ./web_service/
+    container_name: mt_console
+    ports:
+      - "3000:3000"
+    links:
+      - backend
+    networks:
+      - shared_network
 
 networks:
   shared_network:
