@@ -1,0 +1,15 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "command": "npm start",
+            "name": "Frontend Launch",
+            "cwd": "${workspaceFolder}/web_service",
+            "request": "launch",
+            "type": "node-terminal"
+        }
+    ]
+}
