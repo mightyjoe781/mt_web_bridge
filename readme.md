@@ -1,0 +1,1 @@
+To test postgres dbs : docker exec -it postgres psql -U smk -d smk_mc2 -c "\dt"

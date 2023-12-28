@@ -4,6 +4,7 @@ services:
   multicraft:
     build: ./game_service/docker/
     container_name: prismo
+    restart: always
     image: smk781/mtmod_dev_setup
     entrypoint: "/usr/local/bin/multicraftserver --world /var/lib/multicraft/worlds/prismo --config /multicraft.conf"
     user: root
@@ -14,7 +15,11 @@ services:
       - "prismo:/var/lib/multicraft/worlds/prismo"
     ports:
       - "30000:30000/udp"
+    depends_on:
+      gamedb:
+        condition: service_healthy
     links:
+      - gamedb
       - backend
     networks:
       - shared_network
@@ -24,6 +29,7 @@ services:
       context: ./rest_service
       dockerfile: Dockerfile
     container_name: flask_backend
+    restart: always
     environment:
       - FLASK_DEBUG=1
     volumes:
@@ -45,6 +51,25 @@ services:
       - "3000:3000"
     links:
       - backend
+    networks:
+      - shared_network
+  
+  gamedb:
+    container_name: postgres_gamedb
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "admin"
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+      TZ: "Asia/Kolkata"
+    volumes:
+      # - "./db/:/var/lib/postgresql/data/"
+      # init scripts for db creation
+      - "./gamedb/initdb/:/docker-entrypoint-initdb.d/"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U smk -d smk_mc2"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - shared_network
 
